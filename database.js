@@ -6,6 +6,7 @@ const Course = require('./obj/course');
 const Color = require('./obj/color');
 const Button = require('./obj/button');
 const CatLink = require('./obj/catlink');
+const LogChannel = require('./obj/logchannel');
 
 const schemaPath = 'data/schema.txt';
 const dbPath = 'data/data.db';
@@ -13,8 +14,9 @@ const dbEditTable = 'edits';
 const comment = '--';
 
 class Database {
-    constructor () {    
+    constructor (client) {    
         this.db = new sqlite3.Database(dbPath);
+        this.client = client;
     }
 
     setup() {
@@ -111,6 +113,24 @@ class Database {
 
   getLinkCountByCatID(catID) {
     return CatLink.getLinkCountByCatID(this.db, catID);
+  }
+
+  saveLogChannelID(channelID) {
+    return LogChannel.saveToDB(this.db, channelID);
+  }
+
+  getLogChannelID() {
+    return LogChannel.getLogChannelID(this.db);
+  }
+
+  writeToLogChannel(msg) {
+    this.getLogChannelID().then(id => {
+        if (id != 'no channel') {
+            const logChannel = this.client.channels.cache.get(id);
+            logChannel.send(msg);
+        }
+    })
+    
   }
 }
 module.exports = Database;

@@ -27,7 +27,9 @@ module.exports = {
 			
 			if (!classVet) {interaction.guild.roles.create({name: `${classNum}` + ' Veteran'})}
 			if (!classStu) {await interaction.reply({content: 'There is no matching student role for that class number: ' + classNum, ephemeral: true});}
-			
+
+			var logMsg = "Archived class " + classNum + '\n';
+
 			const list = await interaction.guild.members.fetch();
 			var rolesChanged = 0;
 			//this could probably be optimized by using .filter, look into it later 
@@ -37,6 +39,8 @@ module.exports = {
 					member.roles.add(classVet); //add class-veteran role
 					member.roles.remove(classStu);//remove classStu role
 					rolesChanged = rolesChanged + 1
+					logMsg = logMsg + '	Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id 
+						+ '> to ' + member.user.username + '\n';
 				}
 			}
 			cluster.permissionOverwrites.delete(classStu);//remove permission from classStu to access class cluster
@@ -52,7 +56,8 @@ module.exports = {
 				})
 			}); 
 
-			
+			database.writeToLogChannel(logMsg);
+
 			await interaction.reply({content: 'Archived class ' + cluster.name + '\n' + 'Users updated from student to veteran role: '
 				+ rolesChanged, ephemeral: true});
 		}

@@ -5,13 +5,13 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const db = require('./database');
-const database = new db();
 
 // Import token from private config file
 const {token} = require('./config.json');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]});
 client.commands = new Collection();
+const database = new db(client);
 
 // Import commands
 const commandPath = path.join(__dirname, "commands");

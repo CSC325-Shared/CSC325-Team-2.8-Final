@@ -49,6 +49,12 @@ CREATE TABLE Cat_links (
     courseID TEXT NOT NULL,
     catID TEXT NOT NULL,
     FOREIGN KEY(courseID) REFERENCES Courses(course_id)
-)
+);
+^
+
+CREATE TABLE Log_channel (
+    channelID TEXT NOT NULL
+);
+
 
 -- Do not include the '^' after the last command!

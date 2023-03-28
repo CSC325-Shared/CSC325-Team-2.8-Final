@@ -14,7 +14,7 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
         
                 
-	async execute(interaction) {
+	async execute(interaction, database) {
 		// const embed = new EmbedBuilder();
 		// const category = 1089030381929504799;
 
@@ -39,6 +39,8 @@ module.exports = {
 			name: 'Log Channel',
 			type: ChannelType.GuildText,
 			parent: category.id,
+			}).then(logChannel => {
+				database.saveLogChannelID(logChannel.id);
 			});
 		});
 		
