@@ -10,40 +10,40 @@ module.exports = {
 			.setTitle('Bot Command Help')
 			.addFields([
 				{
-					name: '/Archive',
+					name: '/archive',
 					value: 'Gives veteran roles, removes student roles, and removes permissions for a given category and class number.',
 					/*additonal info: needs to be run multiple times for cohabitated course. will mark course as archived when no courses using the category.
 					deletes course from the database. destructive action*/
 				},
 				{
-					name: '/Classes',
+					name: '/classes',
 					value: 'Lists all the currently active classes',
 				},
 				{
-					name: '/Course Select',
+					name: '/course-select',
 					value: 'Creates a message for students to self-assign roles',
 				},
 				{
-					name: '/Delete Class',
+					name: '/delete-channels',
 					value: 'Deletes a class category and its child channels',
 					//additional info: destructive action
 				},
 				{
-					name: '/New Class',
+					name: '/newclass',
 					value: 'Generates a new class category with child channels',
 					/*additional info: uses pre-existing student/veteran roles if they exist, creates them if not. sets student role permissions.
 					saves course to list of currently active classes. */
 				},
 				{
-					name: '/New Role',
+					name: '/newrole',
 					value: 'Creates a new role',
 				},
 				{
-					name: '/Setup',
+					name: '/setup',
 					value: 'Assigns a category for the bot log and to interact with the bot',
 				},
 				{
-					name: '/Welcome',
+					name: '/welcome',
 					value: 'Creates a welcome message that displays the server rules',
 				},
 			]);
