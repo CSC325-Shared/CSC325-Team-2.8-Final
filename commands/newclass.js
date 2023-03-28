@@ -60,8 +60,10 @@ module.exports = {
             rolesList.sort(function(a, b) {
                 return b.position - a.position;
             });
-            const studentRoles = rolesList.filter(item => /\d\d\d Students/.test(item.name));
-            // Create student role, if it doesn't already exist
+            const studentRoles = rolesList.filter(item => item.name.includes('Students'));
+            // remove "Students" role from the array
+            studentRoles.splice(studentRoles.indexOf("Students"), 1);
+
             if (!interaction.guild.roles.cache.find(role => role.name == studentsRole)) {
                 studentColor = await database.getAvailableColor();
                 if (studentColor === "No available color") {
