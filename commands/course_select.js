@@ -11,11 +11,15 @@ module.exports = {
 		.addRoleOption(option => option.setName(`class2`).setDescription('Student role for second class').setRequired(false))
 		.addRoleOption(option => option.setName(`class3`).setDescription('Student role for third class').setRequired(false))
 		.addRoleOption(option => option.setName(`class4`).setDescription('Student role for fourth class').setRequired(false))
-		.addRoleOption(option => option.setName(`class5`).setDescription('Student role for fifth class').setRequired(false)),
+		.addRoleOption(option => option.setName(`class5`).setDescription('Student role for fifth class').setRequired(false))
+		.addRoleOption(option => option.setName(`class6`).setDescription('Student role for sixth class').setRequired(false))
+		.addRoleOption(option => option.setName(`class7`).setDescription('Student role for seventh class').setRequired(false))
+		.addRoleOption(option => option.setName(`class8`).setDescription('Student role for eighth class').setRequired(false)),
 
 	async execute(interaction, database) {
 		const roles = [];
 		const buttons = [];
+		const buttons2 = [];
 
 		const btnNameBase = 'classBtn';
 
@@ -24,7 +28,7 @@ module.exports = {
 
 		// TODO: Should we delete existing role assignment messages? Would need to store their ids
 
-		for (i = 1; i <= 5; ++i) {
+		for (i = 1; i <= 8; ++i) {
 			roles.push(interaction.options.getRole(`class${i}`));
 		}
 
@@ -32,19 +36,29 @@ module.exports = {
 		for (i = 0; i < roles.length; ++i) {
 			if (roles[i]) {
 				const btnID = btnNameBase + (i + 1);
-				buttons.push(
-					new ButtonBuilder()
-						.setCustomId(btnID)
-						.setLabel(`${roles[i].name}`)
-						.setStyle(ButtonStyle.Secondary)
-				);
+				if (buttons.length < 5) {
+					buttons.push(
+						new ButtonBuilder()
+							.setCustomId(btnID)
+							.setLabel(`${roles[i].name}`)
+							.setStyle(ButtonStyle.Secondary)
+					);
+				} else {
+					// More than 5 buttons, add them to the second array
+					buttons2.push(
+						new ButtonBuilder()
+							.setCustomId(btnID)
+							.setLabel(`${roles[i].name}`)
+							.setStyle(ButtonStyle.Secondary)
+					);
+				}
 				// Save link between button and the role it assigns
 				database.saveButton(new Button(btnID, roles[i].id));
 			}
 		}
 
 		const buttonRow1 = new ActionRowBuilder()
-			.addComponents(buttons)
+			.addComponents(buttons)	
 			
 		const embed = new EmbedBuilder()
 			.setTitle('Course Selection Tutorial')
@@ -68,8 +82,14 @@ module.exports = {
 					value: 'Verify that the channels you need access to were added to the sidebar after selecting the classes you need. You will see the left sidebar populate with channels after you click the buttons that are the classes you need.',
 				},
 			])
-
-		await interaction.reply({ embeds: [embed], components: [buttonRow1] });
+		if (buttons2.length == 0) {
+			await interaction.reply({ embeds: [embed], components: [buttonRow1] });
+		} else {
+			// If there are more than 5 buttons, create a new row
+			const buttonRow2 = new ActionRowBuilder()
+				.addComponents(buttons2)
+			await interaction.reply({ embeds: [embed], components: [buttonRow1, buttonRow2] });
+		}
 	},
 
 
