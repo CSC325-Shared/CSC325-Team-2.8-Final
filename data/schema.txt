@@ -1,0 +1,54 @@
+-- Add tables to the database by adding a CREATE TABLE command to this file
+-- All commands must be separated by a '^' character
+-- To change an existing table, without deleting the existing database and re-running all commands,
+-- 	  add and ALTER TABLE command - https://www.sqlite.org/lang_altertable.html
+-- INSERT, UPDATE, and DELETE can be added here if you wish to setup some default data
+
+-- I'd like to remove this, but that would require deleting all existing tables, so just ignore it
+CREATE TABLE test (
+	test_id INTEGER PRIMARY KEY,
+	first_name TEXT NOT NULL
+);
+^
+
+CREATE TABLE Courses (
+	course_id INTEGER PRIMARY KEY,
+	dept TEXT NOT NULL,
+	code TEXT NOT NULL,
+	semester TEXT NOT NULL
+);
+^
+
+CREATE TABLE Colors (
+    hex TEXT NOT NULL,
+    available INTEGER
+);
+^
+
+INSERT INTO Colors (hex, available)
+VALUES 
+   ("#A060D0", 1),
+   ("#D52C37", 1),
+   ("#FF92B5", 1),
+   ("#3FB346", 1),
+   ("#FF9E00", 1),
+   ("#29C1C1", 1),
+   ("#E75F4D", 1),
+   ("#4A6FE3", 1),
+   ("#038664", 1),
+   ("#C7AB1C", 1);
+^
+
+CREATE TABLE Buttons (
+	buttonID TEXT NOT NULL,
+	roleID TEXT NOT NULL
+);
+^
+
+CREATE TABLE Cat_links (
+    courseID TEXT NOT NULL,
+    catID TEXT NOT NULL,
+    FOREIGN KEY(courseID) REFERENCES Courses(course_id)
+)
+
+-- Do not include the '^' after the last command!

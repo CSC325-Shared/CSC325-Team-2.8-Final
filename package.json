@@ -1,0 +1,28 @@
+{
+  "name": "csc325-team-8-development",
+  "version": "1.0.0",
+  "description": "Development repo for Team 8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatsAreEvil/CSC325-Team-8-Development.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatsAreEvil/CSC325-Team-8-Development/issues"
+  },
+  "homepage": "https://github.com/CatsAreEvil/CSC325-Team-8-Development#readme",
+  "dependencies": {
+    "color": "^4.2.3",
+    "discord.js": "^14.7.1",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0"
+  }
+}
