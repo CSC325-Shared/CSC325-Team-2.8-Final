@@ -19,15 +19,14 @@ Replace the values with your token, clientId(ID of the bot), and guildId(ID of t
 You also must have Discord.js and Node.js installed. 
 Tutorial here: https://discordjs.guide/preparations/#installing-node-js
 
-You'll need to install the sqlite library with the following command: `npm install sqlite3`
-
+You'll need to install the sqlite library with the following command: `npm install sqlite3` and the color package: `npm install color`
 
 ## Commands
 **Current commands:**
 
 `/welcome` - Creates a message to welcome new members to the server and specify the rules of the server.
 
-`/courses` - Generates a message with the chosen roles. Users can click the buttons on the message to get roles assigned to them.
+`/course-select` - Generates a message with the chosen roles. Users can click the buttons on the message to get roles assigned to them.
 
 `/newclass` - Creates a class, taking the department, course number, and semester as parameters. When this command is ran, a new group of channels is created in the server, with the parameters from the `/newclass` command used to name the channels. This command also allows you to select a category to cohabitate with, which will use an existing category for the class, instead of creating new channesl.
 
@@ -42,7 +41,7 @@ You'll need to install the sqlite library with the following command: `npm insta
 
 `/setup` - Creates the channels the bot will use. This is currently in progress, and the channels are not used by the bot yet.
 
-
+`/help` - Shows a list of current commands and a description of each.
 
 ## Starter Code
 The starter code for this bot was from [Chase C's tutorial bot](https://github.com/Meapers0/Tutorial-bot), following [this guide](https://discordjs.guide/).
