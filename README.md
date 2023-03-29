@@ -1,7 +1,7 @@
 # CSC325 Team 8 Development
- Development repo for Team 8
+ Development repo for Team 2 and 8
 
- Code started from: https://github.com/AndrewJager/CSC325-Team-8-Snapshot-2 
+ Code started from: https://github.com/AndrewJager/CSC325-Team-8-Snapshot-3
 
 ## Setup
 To run this bot, you must create a config.json file (in the same directory as index.js) with the following structure:
