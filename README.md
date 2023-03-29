@@ -1,4 +1,4 @@
-# CSC325 Team 8 Development
+# CSC325 Team 2 and 8 Development
  Development repo for Team 2 and 8
 
  Code started from: https://github.com/AndrewJager/CSC325-Team-8-Snapshot-3
