@@ -148,17 +148,23 @@ module.exports = {
                             curCoursesTitle = curCoursesTitle + courses[i].dept + ' ' + courses[i].code + '/';
                             curCoursesNums = curCoursesNums + courses[i].code + '-';
                         }
+                        // Discord has an undocmented rate limit for changing a channel name of 2 per 10 min
+                        // https://github.com/discordjs/discord.js/issues/4327#issuecomment-636488615
+                        // Best we can do is to give a warning that the category might not have been properly named
+                        if (courses.length >= 2) {
+                            warning += 'WARNING! - Discord rate limits channel name changes to 2 per 10 minutes.'
+                                + ' Please verify that the category and channels are properly named.' + '\n';
+                        }
                         curCoursesTitle = curCoursesTitle + dept + ' ' + course + ' - ' + semester;
                         curCoursesNums = curCoursesNums + course;
-
                         cohabitate.setName(curCoursesTitle).then(result => {
                             announcementsChannel.setName('announcements-' + curCoursesNums).then(result => {
                                 zoomChannel.setName('zoom-meeting-info-' + curCoursesNums);
                             });
                         });
-                    })
 
-                    resolve(cohabitate.id);
+                        resolve(cohabitate.id);
+                    })
                 }
                 else {
                     //create channels => check for video parameters first
@@ -263,10 +269,9 @@ module.exports = {
                         database.saveCatLink(catLink);
                     });
                 });
+                interaction.reply({ content: warning + 'Created class ' + dept
+                    + ' ' + course + ' in semester ' + semester, ephemeral: true });
             })
-
-            await interaction.reply({ content: warning + 'Created class ' + dept
-                            + ' ' + course + ' in semester ' + semester, ephemeral: true });
 	}},
 };
 
