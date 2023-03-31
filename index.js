@@ -13,6 +13,9 @@ const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits
 client.commands = new Collection();
 const database = new db(client);
 
+// Parameter data for commands that use a confirmation message
+const paramData = new Map();
+
 // Import commands
 const commandPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith(".js"));
@@ -52,19 +55,37 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 	if (interaction.isButton()) {
-		const roleID = await database.getRoleIDByButtonID(interaction.customId);
-		if (roleID !== "No id found!"){
-			const member = interaction.member;
-			const role = interaction.guild.roles.cache.find(role => role.id == roleID);
-			if (!member.roles.cache.has(role.id)) {
-				await member.roles.add(role);
-				await interaction.reply({ content: 'Role ' + role.name + ' added', ephemeral:true });
-			} else {
-				await member.roles.remove(role);
-				await interaction.reply({ content: 'Role ' + role.name + ' removed', ephemeral:true });
+		if (interaction.customId.startsWith('confirmYes')) {
+			const cmdName = interaction.customId.substring(10);
+			const command = interaction.client.commands.get(cmdName);
+			const data = paramData.get(cmdName);
+			try {
+				await command.execute(interaction, database, data);
+			} catch (error) {
+				console.error(error);
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 			}
-			await wait(4000);
-			await interaction.deleteReply();
+		}
+		else if (interaction.customId.startsWith('confirmNo')) {
+			const cmdName = interaction.customId.substring(9);
+			const command = interaction.client.commands.get(cmdName);
+			command.cancelled(interaction);
+		}
+		else {
+			const roleID = await database.getRoleIDByButtonID(interaction.customId);
+			if (roleID !== "No id found!"){
+				const member = interaction.member;
+				const role = interaction.guild.roles.cache.find(role => role.id == roleID);
+				if (!member.roles.cache.has(role.id)) {
+					await member.roles.add(role);
+					await interaction.reply({ content: 'Role ' + role.name + ' added', ephemeral:true });
+				} else {
+					await member.roles.remove(role);
+					await interaction.reply({ content: 'Role ' + role.name + ' removed', ephemeral:true });
+				}
+				await wait(4000);
+				await interaction.deleteReply();
+			}
 		}
 	}
 	if (!interaction.isChatInputCommand()) return;
@@ -77,7 +98,13 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	try {
-		await command.execute(interaction, database);
+		if (typeof command.confirmation === "function") {
+			const data = command.confirmation(interaction);
+			paramData.set(command.data.name, data);
+		}
+		else {
+			await command.execute(interaction, database);
+		}
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
