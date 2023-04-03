@@ -1,21 +1,19 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, ChannelType, AuditLogEvent, Client, Events } = require('discord.js');
-const {logChannel} = require('./config.json');
-//const {channel, guildId, options}=interaction;
-
-let logSetup = true; //If setup command has been ran or not
 
 function handleLogs(client) {
     
     //Send message reguarding a log
     function send_log(guildId, embed) {
          try {
-            logChannel.send({ embeds: [embed] });
+            Database.logChannel.id.send({ embeds: [embed] });
         } catch(err) {
             console.log(err);
         }
     }
 
-    // Channel Created
+
+
+  /*  // Channel Created
     client.on("channelCreate", (channel) => {
 
         const embed = new EmbedBuilder()
@@ -25,9 +23,7 @@ function handleLogs(client) {
 
         return send_log(channel.guild.id, embed);
 
-    })
-
-
+    })*/
 
     /*
     // Channel Deleted
