@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder, ChannelType, GuildManager } = require('discord.js');
-//Work in progress
 
 module.exports = {
 	data: new SlashCommandBuilder()
