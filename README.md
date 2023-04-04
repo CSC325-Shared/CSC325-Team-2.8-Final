@@ -24,6 +24,10 @@ You'll need to install the sqlite library with the following command: `npm insta
 ## Commands
 **Current commands:**
 
+`/help` - Shows a list of current commands and a description of each.
+
+`/setup` - Creates the channels the bot will use. This is currently in progress, and the channels are not used by the bot yet.
+
 `/welcome` - Creates a message to welcome new members to the server and specify the rules of the server.
 
 `/course-select` - Generates a message with the chosen roles. Users can click the buttons on the message to get roles assigned to them.
@@ -39,9 +43,7 @@ You'll need to install the sqlite library with the following command: `npm insta
 
 `/archive` - Takes a category and class number as parameters. All users with the student role receive the veteran role, and have the student role removed. The access the student role to the category is removed. The category has "(Archived)" appended to its name. When archiving cohabitated courses, each course must be individually archived. The category will not be renamed to "(Archived)" until all courses using that category have been archived.
 
-`/setup` - Creates the channels the bot will use. This is currently in progress, and the channels are not used by the bot yet.
-
-`/help` - Shows a list of current commands and a description of each.
+`/poll` - Creates a poll after you enter a title, and at least two options.
 
 ## Starter Code
 The starter code for this bot was from [Chase C's tutorial bot](https://github.com/Meapers0/Tutorial-bot), following [this guide](https://discordjs.guide/).
