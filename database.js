@@ -131,7 +131,9 @@ class Database {
     this.getLogChannelID().then(id => {
         if (id != 'no channel') {
             const logChannel = this.client.channels.cache.get(id);
-            logChannel.send(msg);
+            if (logChannel) {
+                logChannel.send(msg);
+            }
         }
     })
     

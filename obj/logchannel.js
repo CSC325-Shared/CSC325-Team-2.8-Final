@@ -8,12 +8,16 @@ class LogChannel{
     }
 
     static saveToDB(db, channelID) {
-        let c = 'INSERT INTO ' + this.tableName + '(channelID)'
-        + ' VALUES($channelID);'
-        db.run(c,
-            {
-                $channelID: channelID,
-            });
+        // Remove existing log channel
+        db.run('DELETE FROM ' + this.tableName,
+        {}, (err) => {
+            let c = 'INSERT INTO ' + this.tableName + '(channelID)'
+            + ' VALUES($channelID);'
+            db.run(c,
+                {
+                    $channelID: channelID,
+                });
+        });
     }
 
     static getLogChannelID(db) {
