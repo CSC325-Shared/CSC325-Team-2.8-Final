@@ -9,7 +9,7 @@ const db = require('./database');
 // Import token from private config file
 const {token} = require('./config.json');
 
-const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]});
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages]});
 client.commands = new Collection();
 const database = new db(client);
 
@@ -65,11 +65,15 @@ client.on(Events.InteractionCreate, async interaction => {
 				console.error(error);
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 			}
+
+			interaction.message.delete();
 		}
 		else if (interaction.customId.startsWith('confirmNo')) {
 			const cmdName = interaction.customId.substring(9);
 			const command = interaction.client.commands.get(cmdName);
 			command.cancelled(interaction);
+			
+			interaction.message.delete();
 		}
 		else {
 			const roleID = await database.getRoleIDByButtonID(interaction.customId);
