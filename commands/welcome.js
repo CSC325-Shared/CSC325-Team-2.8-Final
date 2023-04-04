@@ -7,7 +7,7 @@ module.exports = {
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 	async execute(interaction) {
 		const embed = new EmbedBuilder()
-			.setTitle('Welcome to Profressor Spradling\'s Discord!')
+			.setTitle('Welcome to Professor Spradling\'s Discord!')
             .setThumbnail('https://blogs.umflint.edu/cas/wp-content/uploads/sites/5/2016/01/spradling.jpg')
 			.setColor('Red')
 			.addFields([
