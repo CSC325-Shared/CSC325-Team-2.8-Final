@@ -79,6 +79,10 @@ class Database {
     return Course.getCoursesWithCategory(this.db, catID);
   }
 
+  getCourseByNum(courseNum) {
+    return Course.getCourseByNum(this.db, courseNum);
+  }
+
   getAvailableColor() {
       return Color.getAvailableColor(this.db);
   }

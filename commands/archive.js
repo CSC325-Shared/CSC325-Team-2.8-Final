@@ -29,38 +29,40 @@ module.exports = {
 			if (!classVet) {interaction.guild.roles.create({name: `${classNum}` + ' Veteran'})}
 			if (!classStu) {await interaction.reply({content: 'There is no matching student role for that class number: ' + classNum, ephemeral: true});}
 
-			var logMsg = "Archived class " + classNum + '\n';
+			database.getCourseByNum(classNum).then(course => {
+				var logMsg = "Archived class " + course.dept + course.code + ' - ' + course.semester + '\n';
 
-			const list = await interaction.guild.members.fetch();
-			var rolesChanged = 0;
-			//this could probably be optimized by using .filter, look into it later 
-			for(i = 0; i < list.size; i++){ //loop through all students who have the classStu role
-				var member = list.at(i); 
-				if (member.roles.cache.some(role => role === classStu)) {
-					member.roles.add(classVet); //add class-veteran role
-					member.roles.remove(classStu);//remove classStu role
-					rolesChanged = rolesChanged + 1
-					logMsg = logMsg + '	Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id 
-						+ '> to ' + member.user.username + '\n';
-				}
-			}
-			cluster.permissionOverwrites.delete(classStu);//remove permission from classStu to access class cluster
-			cluster.children.cache.forEach(channel => channel.permissionOverwrites.delete(classStu)); //remove permission from individual channels within the cluster
-			
-			// Delete course from database
-			database.deleteCourseByCatIDandCourseCode(cluster.id, classNum).then(result => {
-				// Check if any courses are still using the category. If none, then mark the category as 'Archived'
-				database.getLinkCountByCatID(cluster.id).then(linkCount => {
-					if (linkCount === 0) {
-						cluster.setName(cluster.name + " (Archived)");
-					} 
-				})
-			}); 
+				interaction.guild.members.fetch().then(list => {
+					var rolesChanged = 0;
+					//this could probably be optimized by using .filter, look into it later 
+					for(i = 0; i < list.size; i++){ //loop through all students who have the classStu role
+						var member = list.at(i); 
+						if (member.roles.cache.some(role => role === classStu)) {
+							member.roles.add(classVet); //add class-veteran role
+							member.roles.remove(classStu);//remove classStu role
+							rolesChanged = rolesChanged + 1
+							logMsg = logMsg + '	Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id 
+								+ '> to ' + member.user.username + '\n';
+						}
+					}
+					cluster.permissionOverwrites.delete(classStu);//remove permission from classStu to access class cluster
+					cluster.children.cache.forEach(channel => channel.permissionOverwrites.delete(classStu)); //remove permission from individual channels within the cluster
+					
+					// Delete course from database
+					database.deleteCourseByCatIDandCourseCode(cluster.id, classNum).then(result => {
+						// Check if any courses are still using the category. If none, then mark the category as 'Archived'
+						database.getLinkCountByCatID(cluster.id).then(linkCount => {
+							if (linkCount === 0) {
+								cluster.setName(cluster.name + " (Archived)");
+							} 
+						})
+					}); 
 
-			database.writeToLogChannel(logMsg);
-
-			await interaction.reply({content: 'Archived class ' + cluster.name + '\n' + 'Users updated from student to veteran role: '
-				+ rolesChanged, ephemeral: true});	
+					database.writeToLogChannel(logMsg);
+					interaction.reply({content: 'Archived class ' + cluster.name + '\n' + 'Users updated from student to veteran role: '
+						+ rolesChanged, ephemeral: true});	
+				});
+			});
 		},
 
 		confirmation(interaction) {
