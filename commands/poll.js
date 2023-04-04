@@ -11,19 +11,14 @@ module.exports = {
     .addStringOption(option => option.setName('answer4').setDescription('Enter the fourth option to choose from').setMaxLength(100).setRequired(false))
     .addStringOption(option => option.setName('answer5').setDescription('Enter the fifth option to choose from').setMaxLength(100).setRequired(false))
     .addStringOption(option => option.setName('answer6').setDescription('Enter the sixth option to choose from').setMaxLength(100).setRequired(false)),
-    //.addBooleanOption(option => option.setName('use-own-emoji').setDescription('Do you want to use your own emoji rather than the default ones provided by the command?').setRequired(false))
-    //.addStringOption(option => option.setName('custom-emoji').setDescription('Enter the custom emoji you want to use for the poll. Separate them with a comma').setMaxLength(200).setRequired(false)),   
     
     async execute(interaction) {
         await interaction.deferReply()
         const { user, guild, channel} = await interaction;
         const title = interaction.options.getString('title');
         const options = interaction.options.data;
-        //const useOwnEmoji = interaction.options.getString('use-own-emoji');
-        //const customEmoji = interaction.options.getString('custom-emoji').split(' ');
         const defaultEmoji = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣"];
         
-        console.log(options);
         //embed builder
         let embed = new EmbedBuilder()
         .setTitle(title)
@@ -33,15 +28,12 @@ module.exports = {
         for(i = 1; i < options.length; ++i) {
             let emoji = defaultEmoji[i-1]
             let answer = options[i]
-            //if (options[i].name === 'custom-emoji') {break}
-            //else {
-              embed.addFields(
+            embed.addFields(
                 {
                     name: `${emoji} ${answer.value}`,
                     value: ' '
                 }
             )   
-            //}
                   
         }
         const message = await channel.send({embeds: [embed]});

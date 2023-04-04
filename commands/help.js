@@ -46,6 +46,10 @@ module.exports = {
 					name: '/welcome',
 					value: 'Creates a welcome message that displays the server rules',
 				},
+				{
+					name: '/poll',
+					value: 'Creates a poll after you enter a title, and at least two options.',
+				},
 			]);
 			await interaction.reply({
 			embeds: [embed],
