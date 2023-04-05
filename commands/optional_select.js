@@ -4,7 +4,7 @@ const Button = require('../obj/button');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('permrole')
+		.setName('optional-select')
 		.setDescription('Create a message to allow students to assign optional roles to themselves')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.addRoleOption(option => option.setName(`role1`).setDescription('First role').setRequired(true))
