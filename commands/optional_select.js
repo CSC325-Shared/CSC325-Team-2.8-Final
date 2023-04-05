@@ -5,16 +5,16 @@ const Button = require('../obj/button');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('permrole')
-		.setDescription('Create a message to allow students to assign roles to themselves')
+		.setDescription('Create a message to allow students to assign optional roles to themselves')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-		.addRoleOption(option => option.setName(`role1`).setDescription('First permanent role').setRequired(true))
-		.addRoleOption(option => option.setName(`role2`).setDescription('Second permanent role').setRequired(false))
-		.addRoleOption(option => option.setName(`role3`).setDescription('Third permanent role').setRequired(false))
-		.addRoleOption(option => option.setName(`role4`).setDescription('Fourth permanent role').setRequired(false))
-		.addRoleOption(option => option.setName(`role5`).setDescription('Fifth permanent role').setRequired(false))
-        .addRoleOption(option => option.setName(`role6`).setDescription('Sixth permanent role').setRequired(false))
-		.addRoleOption(option => option.setName(`role7`).setDescription('Seventh permanent role').setRequired(false))
-		.addRoleOption(option => option.setName(`role8`).setDescription('Eighth permanent role').setRequired(false)),
+		.addRoleOption(option => option.setName(`role1`).setDescription('First role').setRequired(true))
+		.addRoleOption(option => option.setName(`role2`).setDescription('Second role').setRequired(false))
+		.addRoleOption(option => option.setName(`role3`).setDescription('Third role').setRequired(false))
+		.addRoleOption(option => option.setName(`role4`).setDescription('Fourth role').setRequired(false))
+		.addRoleOption(option => option.setName(`role5`).setDescription('Fifth role').setRequired(false))
+        .addRoleOption(option => option.setName(`role6`).setDescription('Sixth role').setRequired(false))
+		.addRoleOption(option => option.setName(`role7`).setDescription('Seventh role').setRequired(false))
+		.addRoleOption(option => option.setName(`role8`).setDescription('Eighth role').setRequired(false)),
 
 	async execute(interaction, database) {
 		const roles = [];
@@ -25,8 +25,6 @@ module.exports = {
 
 		// Delete existing buttons from database
 		await database.deleteButtonsStartingWith(btnNameBase);
-
-		// TODO: Should we delete existing role assignment messages? Would need to store their ids
 
 		for (i = 1; i <= 8; ++i) {
 			roles.push(interaction.options.getRole(`role${i}`));
@@ -62,16 +60,16 @@ module.exports = {
 			
 		const embed = new EmbedBuilder()
 			.setTitle('Role Selection Tutorial')
-            .setDescription('Read the steps carefully to ensure you that you select the role want to have.')
-			.setColor('Yellow')
+            .setDescription('Follow these steps below to select your desired role(s)')
+			.setColor('Green')
 			.addFields([
 				{
 					name: 'Step 1',
-					value: 'Read through all roles to find ones that pertain to you or ones you would like to have.',
+					value: 'Review all available roles and select the ones that are relevant or desirable to you.',
 				},
 				{
 					name: 'Step 2',
-					value: 'Click the button that is labelled with the role or roles that you are interested in.',
+					value: 'Click the button corresponding to the role(s) you wish to have.',
 				},
 				{
 					name: 'Step 3',
