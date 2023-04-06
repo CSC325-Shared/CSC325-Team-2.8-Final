@@ -54,6 +54,10 @@ module.exports = {
 					name: '/poll',
 					value: 'Creates a poll after you enter a title, and at least two options.',
 				},
+				{
+					name: '/roll',
+					value: 'Rolls a given number of dice with a certain number of sides, can optionally add or subtract a modifier from the total.',
+				},
 			]);
 			await interaction.reply({
 			embeds: [embed],
