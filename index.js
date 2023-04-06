@@ -112,4 +112,10 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 
+module.exports = client;	//Allows for clients in seperate .js files without using module exports
+
+fs.readdirSync('./handlers').forEach((handler) => {
+	require(`./handlers/${handler}`)(client)
+});
+
 client.login(token);
