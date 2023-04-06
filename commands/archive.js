@@ -30,7 +30,7 @@ module.exports = {
 			if (!classStu) {await interaction.reply({content: 'There is no matching student role for that class number: ' + classNum, ephemeral: true});}
 
 			database.getCourseByNum(classNum).then(course => {
-				var logMsg = "Archived class " + course.dept + course.code + ' - ' + course.semester + '\n';
+				var logMsg = "Archived class: **" + cluster.name + '**\n';
 
 				interaction.guild.members.fetch().then(list => {
 					var rolesChanged = 0;
@@ -41,8 +41,8 @@ module.exports = {
 							member.roles.add(classVet); //add class-veteran role
 							member.roles.remove(classStu);//remove classStu role
 							rolesChanged = rolesChanged + 1
-							logMsg = logMsg + '	Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id 
-								+ '> to ' + member.user.username + '\n';
+							logMsg = logMsg + ' Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id 
+								+ '> to user **' + member.user.tag +'**\n';
 						}
 					}
 					cluster.permissionOverwrites.delete(classStu);//remove permission from classStu to access class cluster
@@ -59,7 +59,7 @@ module.exports = {
 					}); 
 
 					database.writeToLogChannel(logMsg);
-					interaction.reply({content: 'Archived class ' + cluster.name + '\n' + 'Users updated from student to veteran role: '
+					interaction.reply({content: 'Archived class: **' + cluster.name + '**\n' + 'Users updated from student to veteran role: '
 						+ rolesChanged, ephemeral: true});	
 				});
 			});

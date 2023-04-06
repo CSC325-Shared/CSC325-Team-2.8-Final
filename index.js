@@ -115,11 +115,35 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+// Event handlers for log channel
+client.on("channelCreate", (channel) => {
+	database.writeToLogChannel(`Created channel: **${channel.name}**`);
+});
 
-module.exports = client;	//Allows for clients in seperate .js files without using module exports
+client.on("channelDelete", (channel) => {
+	database.writeToLogChannel(`Removed channel: **${channel.name}**`);
+});
 
-fs.readdirSync('./handlers').forEach((handler) => {
-	require(`./handlers/${handler}`)(client)
+client.on('roleCreate', (role) => {
+	database.writeToLogChannel(`Created role: **${role.name}**`);
+});
+
+client.on('roleDelete', (role) => {
+	database.writeToLogChannel(`Removed role: **${role.name}**`);
+});
+
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+	if (oldMember.roles.cache.size < newMember.roles.cache.size) {
+		// Find the added role
+		const addedRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
+		// Log the role name and id
+		database.writeToLogChannel(`User **${newMember.user.tag}** added role <@&${addedRole.id}>`);
+	  } else if (oldMember.roles.cache.size > newMember.roles.cache.size) {
+		// Find the removed role
+		const removedRole = oldMember.roles.cache.find(role => !newMember.roles.cache.has(role.id));
+		// Log the role name and id
+		database.writeToLogChannel(`User **${newMember.user.tag}** removed role <@&${removedRole.id}>`);
+	  }
 });
 
 client.login(token);
