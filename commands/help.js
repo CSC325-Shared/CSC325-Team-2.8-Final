@@ -10,23 +10,24 @@ module.exports = {
 			.setTitle('Bot Command Help')
 			.addFields([
 				{
-					name: '/archive',
-					value: 'Gives veteran roles, removes student roles, and removes permissions for a given category and class number.',
-					/*additonal info: needs to be run multiple times for cohabitated course. will mark course as archived when no courses using the category.
-					deletes course from the database. destructive action*/
+					name: '/setup',
+					value: 'Assigns a category for the bot log and to interact with the bot',
 				},
 				{
-					name: '/classes',
-					value: 'Lists all the currently active classes',
+					name: '/welcome',
+					value: 'Creates a welcome message that displays the server rules',
 				},
 				{
 					name: '/course-select',
 					value: 'Creates a message for students to self-assign roles',
 				},
 				{
-					name: '/delete-channels',
-					value: 'Deletes a class category and its child channels',
-					//additional info: destructive action
+					name: '/optional-select',
+					value: 'Creates a message for users to self-assign optional roles',
+				},
+				{
+					name: '/newrole',
+					value: 'Creates a new role',
 				},
 				{
 					name: '/newclass',
@@ -35,16 +36,23 @@ module.exports = {
 					saves course to list of currently active classes. */
 				},
 				{
-					name: '/newrole',
-					value: 'Creates a new role',
+					name: '/classes',
+					value: 'Lists all the currently active classes',
 				},
 				{
-					name: '/setup',
-					value: 'Assigns a category for the bot log and to interact with the bot',
+					name: '/delete-channels',
+					value: 'Deletes a class category and its child channels',
+					//additional info: destructive action
 				},
 				{
-					name: '/welcome',
-					value: 'Creates a welcome message that displays the server rules',
+					name: '/archive',
+					value: 'Gives veteran roles, removes student roles, and removes permissions for a given category and class number.',
+					/*additonal info: needs to be run multiple times for cohabitated course. will mark course as archived when no courses using the category.
+					deletes course from the database. destructive action*/
+				},
+				{
+					name: '/poll',
+					value: 'Creates a poll after you enter a title, and at least two options.',
 				},
 			]);
 			await interaction.reply({

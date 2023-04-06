@@ -162,6 +162,23 @@ class Course {
             });
         });
     }
+
+    static getCourseByNum(db, courseNum) {
+        return new Promise((resolve, reject)=>{
+            db.get('SELECT * FROM ' + this.tableName
+            + ' WHERE code = $code',
+            {
+                $code: courseNum
+            }, (err, row) => {
+                if (row === undefined) {
+                    resolve('No course!');
+                }
+                else {
+                    resolve(new Course(row.dept, row.code, row.semester));
+                }
+            });
+        });
+    }
 }
 
 module.exports = Course;

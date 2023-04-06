@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription('Create a new general role')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.addStringOption((option) => option.setName('name').setDescription('Enter the name of the role').setRequired(true))
-		.addStringOption((option) => option.setName('color').setDescription('Enter a hexcode for the color of the role').setRequired(true)),
+		.addStringOption((option) => option.setName('color').setDescription('Enter a hexcode for the color of the role. Ex: #84b55b').setRequired(true)),
 	
     
         async execute(interaction) {

@@ -1,7 +1,7 @@
 const { ButtonBuilder, ActionRowBuilder, EmbedBuilder, ButtonStyle } = require('discord.js')
 
 class Confirmation {
-    static buildMsg(name, interaction) {
+    static async buildMsg(name, interaction) {
         const confirmationEmbed = new EmbedBuilder()
         .setColor('Red')
         .setTitle('Are you sure you want to perform this destructive action?')
@@ -24,7 +24,7 @@ class Confirmation {
         const data = {
             embeds: [confirmationEmbed],
             components: [buttonRow],
-            ephemeral: true
+            ephemeral: false // Can't be ephemeral, as we need to delete the message later
         }
         interaction.reply(data);
     }

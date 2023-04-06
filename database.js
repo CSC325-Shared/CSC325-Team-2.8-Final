@@ -79,6 +79,10 @@ class Database {
     return Course.getCoursesWithCategory(this.db, catID);
   }
 
+  getCourseByNum(courseNum) {
+    return Course.getCourseByNum(this.db, courseNum);
+  }
+
   getAvailableColor() {
       return Color.getAvailableColor(this.db);
   }
@@ -127,7 +131,9 @@ class Database {
     this.getLogChannelID().then(id => {
         if (id != 'no channel') {
             const logChannel = this.client.channels.cache.get(id);
-            logChannel.send(msg);
+            if (logChannel) {
+                logChannel.send(msg);
+            }
         }
     })
     
