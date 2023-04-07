@@ -47,6 +47,8 @@ You'll need to install the sqlite library with the following command: `npm insta
 
 `/poll` - Creates a poll after you enter a title, and at least two options.
 
+`/roll` - Rolls a given number of dice with a certain number of sides, can optionally add or subtract a modifier from the total.
+
 ## Starter Code
 The starter code for this bot was from [Chase C's tutorial bot](https://github.com/Meapers0/Tutorial-bot), following [this guide](https://discordjs.guide/).
 ## Poll Command
