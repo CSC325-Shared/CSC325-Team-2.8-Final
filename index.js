@@ -125,7 +125,7 @@ client.on("channelDelete", (channel) => {
 });
 
 client.on('roleCreate', (role) => {
-	database.writeToLogChannel(`Created role: **${role.name}**`);
+	database.writeToLogChannel(`Created role: **${role.name}** with color **${role.hexColor}**`);
 });
 
 client.on('roleDelete', (role) => {
@@ -137,12 +137,12 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 		// Find the added role
 		const addedRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
 		// Log the role name and id
-		database.writeToLogChannel(`User **${newMember.user.tag}** added role <@&${addedRole.id}>`);
+		database.writeToLogChannel(`Role <@&${addedRole.id}> added to user **${newMember.user.tag}**`);
 	  } else if (oldMember.roles.cache.size > newMember.roles.cache.size) {
 		// Find the removed role
 		const removedRole = oldMember.roles.cache.find(role => !newMember.roles.cache.has(role.id));
 		// Log the role name and id
-		database.writeToLogChannel(`User **${newMember.user.tag}** removed role <@&${removedRole.id}>`);
+		database.writeToLogChannel(`Role <@&${removedRole.id}> removed from user **${newMember.user.tag}**`);
 	  }
 });
 
