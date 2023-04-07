@@ -1,6 +1,3 @@
-
-
-
 // I am not naming this "Class", even if that's valid
 class Course {
     static tableName = 'Courses'; // For some reason, I need to declare this a static here, but redeclare it later
