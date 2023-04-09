@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, ChannelType, PermissionFlagsBits } = require('discord.js');
+const Confirmation = require('../obj/confirmation');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,12 +13,23 @@ module.exports = {
 				.setRequired(true)
 				.addChannelTypes(ChannelType.GuildCategory)),
 
-	async execute(interaction) {
-		const cluster = interaction.options.getChannel('cluster');
+	async execute(interaction, database, optionsData) {
+		const cluster = optionsData[0];
 		const clusterName = cluster.name;
-
 		cluster.children.cache.forEach(channel => channel.delete());
 		cluster.delete();
 		await interaction.reply({ content: 'Deleted category ' + clusterName, ephemeral: true });
+	},
+
+	confirmation(interaction) {
+		Confirmation.buildMsg(this.data.name, interaction);
+
+		const optionsData = [];
+		optionsData.push(interaction.options.getChannel('cluster'));
+		return optionsData;
+	},
+
+	async cancelled(interaction) {
+		interaction.reply({ content: 'Cancelled archival', ephemeral: true });
 	},
 };
