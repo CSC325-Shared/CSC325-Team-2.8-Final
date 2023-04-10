@@ -120,23 +120,23 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 // Event handlers for log channel
-client.on('channelCreate', (channel) => {
+client.on(Events.ChannelCreate, (channel) => {
 	database.writeToLogChannel(`Created channel: **${channel.name}**`);
 });
 
-client.on('channelDelete', (channel) => {
+client.on(Events.ChannelDelete, (channel) => {
 	database.writeToLogChannel(`Removed channel: **${channel.name}**`);
 });
 
-client.on('roleCreate', (role) => {
+client.on(Events.GuildRoleCreate, (role) => {
 	database.writeToLogChannel(`Created role: **${role.name}** with color **${role.hexColor}**`);
 });
 
-client.on('roleDelete', (role) => {
+client.on(Events.GuildRoleDelete, (role) => {
 	database.writeToLogChannel(`Removed role: **${role.name}**`);
 });
 
-client.on('guildMemberUpdate', (oldMember, newMember) => {
+client.on(Events.GuildMemberUpdate, (oldMember, newMember) => {
 	if (oldMember.roles.cache.size < newMember.roles.cache.size) {
 		// Find the added role
 		const addedRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
