@@ -41,8 +41,6 @@ module.exports = {
 						member.roles.add(classVet); // add class-veteran role
 						member.roles.remove(classStu);// remove classStu role
 						rolesChanged = rolesChanged + 1;
-						logMsg = logMsg + ' Removed role <@&' + classStu.id + '> and added role <@&' + classVet.id
-								+ '> to user **' + member.user.tag + '**\n';
 					}
 				}
 				cluster.permissionOverwrites.delete(classStu);// remove permission from classStu to access class cluster
