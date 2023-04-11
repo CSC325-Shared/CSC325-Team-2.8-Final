@@ -82,13 +82,14 @@ client.on(Events.InteractionCreate, async interaction => {
 			if (roleID !== 'No id found!') {
 				const member = interaction.member;
 				const role = interaction.guild.roles.cache.find(role => role.id == roleID);
+				await interaction.deferReply({ ephemeral: true });
 				if (!member.roles.cache.has(role.id)) {
 					await member.roles.add(role);
-					await interaction.reply({ content: 'Role ' + role.name + ' added', ephemeral:true });
+					await interaction.editReply({ content: 'Role ' + role.name + ' added', ephemeral:true });
 				}
 				else {
 					await member.roles.remove(role);
-					await interaction.reply({ content: 'Role ' + role.name + ' removed', ephemeral:true });
+					await interaction.editReply({ content: 'Role ' + role.name + ' removed', ephemeral:true });
 				}
 				await wait(4000);
 				await interaction.deleteReply();
