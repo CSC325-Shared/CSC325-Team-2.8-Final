@@ -1,9 +1,10 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder,  PermissionFlagsBits  } = require('discord.js');
 // optional: put in a specific command for more details
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
-		.setDescription('Learn about the bot commands'),
+		.setDescription('Learn about the bot commands')
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 	async execute(interaction) {
 		const embed = new EmbedBuilder()
 			.setColor('Yellow')
