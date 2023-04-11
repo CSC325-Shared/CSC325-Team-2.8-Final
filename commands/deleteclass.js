@@ -30,6 +30,6 @@ module.exports = {
 	},
 
 	async cancelled(interaction) {
-		interaction.reply({ content: 'Cancelled archival', ephemeral: true });
+		interaction.reply({ content: 'Cancelled channel deletion', ephemeral: true });
 	},
 };
