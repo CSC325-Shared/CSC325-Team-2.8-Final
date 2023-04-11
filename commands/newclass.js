@@ -69,8 +69,8 @@ module.exports = {
 			if (!interaction.guild.roles.cache.find(role => role.name == studentsRole)) {
 				studentColor = await database.getAvailableColor();
 				if (studentColor === 'No available color') {
-					studentColor = 'ffffff';
-					warning += 'All colors in the database have been used! Defaulting student role color to #FFFFFF' + '\n';
+					studentColor = 'Default';
+					warning += 'All colors in the database have been used! Role color set to default gray.' + '\n';
 				}
 				await interaction.guild.roles.create({
 					name: studentsRole,
