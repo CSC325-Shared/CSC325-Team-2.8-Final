@@ -17,15 +17,15 @@ module.exports = {
 
 		.addBooleanOption((option) => option.setName('videos').setDescription('Does this class require videos (Zoom Video recordings, or other) to be created? (True/False)').setRequired(true))
 	// meet day selection
-		.addStringOption((option) => option.setName('meet-day').setDescription('Input the day(s) to which the class meets').setRequired(false)
+		.addStringOption((option) => option.setName('meet-day').setDescription('Input the day(s) to which the class meets').setRequired(true)
 			.addChoices({ name: 'mon', value:'Monday' }, { name: 'tue', value:'Tuesday' }, { name: 'wed', value:'Wednesday' }, { name: 'thur', value:'Thursday' }, { name: 'fri', value:'Friday' }))
-		.addStringOption((option) => option.setName('second-day').setDescription('Input the day(s) to which the class meets').setRequired(false)
+		.addStringOption((option) => option.setName('second-day').setDescription('Input the day(s) to which the class meets').setRequired(true)
 			.addChoices({ name: 'mon', value:'Monday' }, { name: 'tue', value:'Tuesday' }, { name: 'wed', value:'Wednesday' }, { name: 'thur', value:'Thursday' }, { name: 'fri', value:'Friday' }))
 	// time
-		.addStringOption((option) => option.setName('times').setDescription('Input the meeting times (Start Time (AM/PM) - End Time (AM/PM)').setRequired(false))
+		.addStringOption((option) => option.setName('times').setDescription('Input the meeting times (Start Time (AM/PM) - End Time (AM/PM)').setRequired(true))
 	// zoom
-		.addStringOption((option) => option.setName('zoom').setDescription('Paste the Zoom link for the class').setRequired(false))
-		.addChannelOption((option) => option.setName('cohabitate').setDescription('Select a class to cohabitate with').setRequired(false)
+		.addStringOption((option) => option.setName('zoom').setDescription('Paste the Zoom link for the class').setRequired(true))
+		.addChannelOption((option) => option.setName('cohabitate').setDescription('Select a class to cohabitate with').setRequired(true)
 			.addChannelTypes(ChannelType.GuildCategory)),
 	async execute(interaction, database) {
 		const dept = interaction.options.getString('dept').toUpperCase();

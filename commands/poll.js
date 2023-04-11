@@ -4,13 +4,13 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('poll')
 		.setDescription('Use this command to create a poll. The max amount of options you can enter is 6.')
-		.addStringOption(option => option.setName('title').setDescription('Insert the title of the poll.').setMaxLength(200).setRequired(true))
-		.addStringOption(option => option.setName('answer1').setDescription('Enter the first option to choose from').setMaxLength(100).setRequired(true))
-		.addStringOption(option => option.setName('answer2').setDescription('Enter the second option to choose from').setMaxLength(100).setRequired(true))
-		.addStringOption(option => option.setName('answer3').setDescription('Enter the third option to choose from').setMaxLength(100).setRequired(false))
-		.addStringOption(option => option.setName('answer4').setDescription('Enter the fourth option to choose from').setMaxLength(100).setRequired(false))
-		.addStringOption(option => option.setName('answer5').setDescription('Enter the fifth option to choose from').setMaxLength(100).setRequired(false))
-		.addStringOption(option => option.setName('answer6').setDescription('Enter the sixth option to choose from').setMaxLength(100).setRequired(false)),
+		.addStringOption(option => option.setName('title').setDescription('Insert the title of the poll.').setMaxLength(300).setRequired(true))
+		.addStringOption(option => option.setName('answer1').setDescription('Enter the first option to choose from').setMaxLength(200).setRequired(true))
+		.addStringOption(option => option.setName('answer2').setDescription('Enter the second option to choose from').setMaxLength(200).setRequired(true))
+		.addStringOption(option => option.setName('answer3').setDescription('Enter the third option to choose from').setMaxLength(200).setRequired(false))
+		.addStringOption(option => option.setName('answer4').setDescription('Enter the fourth option to choose from').setMaxLength(200).setRequired(false))
+		.addStringOption(option => option.setName('answer5').setDescription('Enter the fifth option to choose from').setMaxLength(200).setRequired(false))
+		.addStringOption(option => option.setName('answer6').setDescription('Enter the sixth option to choose from').setMaxLength(200).setRequired(false)),
 
 	async execute(interaction) {
 		await interaction.deferReply();
