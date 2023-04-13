@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js');
 const Confirmation = require('../obj/confirmation');
-// developed by Sarah Luetz
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('archive')
@@ -63,6 +62,7 @@ module.exports = {
 	},
 
 	confirmation(interaction) {
+		// Send the destructive command message
 		Confirmation.buildMsg(this.data.name, interaction);
 
 		const optionsData = [];

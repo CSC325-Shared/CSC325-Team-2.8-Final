@@ -1,5 +1,5 @@
 // Imports
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
 const fs = require('node:fs');
 const path = require('node:path');
@@ -32,9 +32,18 @@ for (const file of commandFiles) {
 
 // Event on startup
 client.once(Events.ClientReady, c => {
+	// Set the status message
+	client.user.setPresence({
+		activities: [
+		  {
+			name: 'your commands!',
+			type: ActivityType.Listening
+		  }
+		],
+		status: 'online'
+	});
 	console.log('Team 2.8 bot is now online!');
 	console.log('Logged in as ' + c.user.tag);
-
 	database.setup();
 });
 
@@ -56,6 +65,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 	if (interaction.isButton()) {
+		// Destructive action yes and no buttons
 		if (interaction.customId.startsWith('confirmYes')) {
 			const cmdName = interaction.customId.substring(10);
 			const command = interaction.client.commands.get(cmdName);
@@ -77,6 +87,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 			interaction.message.delete();
 		}
+		// Course select and optional select role buttons
 		else {
 			const roleID = await database.getRoleIDByButtonID(interaction.customId);
 			if (roleID !== 'No id found!') {
@@ -97,16 +108,15 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 	if (!interaction.isChatInputCommand()) return;
-
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
 	}
-
 	try {
 		if (typeof command.confirmation === 'function') {
+			// Set params from destructive command
 			const data = command.confirmation(interaction);
 			paramData.set(command.data.name, data);
 		}
@@ -116,7 +126,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 	catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({ content: 'There was an error while executing this command! Check the console.', ephemeral: true });
 	}
 });
 
@@ -151,5 +161,6 @@ client.on(Events.GuildMemberUpdate, (oldMember, newMember) => {
 		database.writeToLogChannel(`Role <@&${removedRole.id}> removed from user **${newMember.user.tag}**`);
 	}
 });
+
 
 client.login(token);
