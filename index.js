@@ -152,13 +152,13 @@ client.on(Events.GuildMemberUpdate, (oldMember, newMember) => {
 		// Find the added role
 		const addedRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
 		// Log the role name and id
-		database.writeToLogChannel(`Role <@&${addedRole.id}> added to user **${newMember.user.tag}**`);
+		database.writeToLogChannel(`Role <@&${addedRole.id}> added to user **${newMember.displayName} (${newMember.user.tag})**`);
 	}
 	else if (oldMember.roles.cache.size > newMember.roles.cache.size) {
 		// Find the removed role
 		const removedRole = oldMember.roles.cache.find(role => !newMember.roles.cache.has(role.id));
 		// Log the role name and id
-		database.writeToLogChannel(`Role <@&${removedRole.id}> removed from user **${newMember.user.tag}**`);
+		database.writeToLogChannel(`Role <@&${removedRole.id}> removed from user **${newMember.displayName} (${newMember.user.tag})**`);
 	}
 });
 
