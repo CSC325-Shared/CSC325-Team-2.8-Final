@@ -50,6 +50,9 @@ Run the following command to install the required dependencies: `npm install dis
 
 `/roll` - Rolls a given number of dice with a certain number of sides, can optionally add or subtract a modifier from the total.
 
+## Data
+This bot uses a database, located at data/data.db. If you wish to view or edit it, the database can be opened with https://sqlitebrowser.org
+
 ## Starter Code
 The starter code for this bot was from [Chase C's tutorial bot](https://github.com/Meapers0/Tutorial-bot), following [this guide](https://discordjs.guide/).
 ## Poll Command
