@@ -1,14 +1,15 @@
-# CSC325 Team 2 and 8 Development
- Development repo for Team 2 and 8
+# CSC325 Team 2.8 Discord Bot
 
- Code started from: https://github.com/AndrewJager/CSC325-Team-8-Snapshot-3
+This bot was created for the winter 2023 CSC325 class at UM-Flint. The team is referred to as "2.8" because it was created from a merger of teams 2 and 8.
+
+The bot is a server-management bot for a professor using a discord server to run their classes. It allows for creation of class channels, manages student roles, and provides other useful commands.
 
 ## Setup
 To run this bot, you must create a config.json file (in the same directory as index.js) with the following structure:
 
 ```
 {
-    "token" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "token" : "your-bot-token",
     "clientId" : "1111111111111111111111",
     "guildId" :"222222222222222222222"
 }
@@ -19,7 +20,7 @@ Replace the values with your token, clientId(ID of the bot), and guildId(ID of t
 You also must have Discord.js and Node.js installed. 
 Tutorial here: https://discordjs.guide/preparations/#installing-node-js
 
-You'll need to install the sqlite library with the following command: `npm install sqlite3` and the color package: `npm install color`
+Run the following command to install the required dependencies: `npm install discord.js color sqlite3`
 
 ## Commands
 **Current commands:**
@@ -55,5 +56,6 @@ The starter code for this bot was from [Chase C's tutorial bot](https://github.c
 Code for the `/poll` command is sourced by [Golden Development](https://sites.google.com/view/golden-development/home), following [this guide](https://www.youtube.com/watch?v=qeO25uNZwOQ).
 
 ## Previous Snapshots
-Snapshot #1 - https://github.com/AndrewJager/CSC325-Team-8-Snapshot-1
-Snapshot #2 - https://github.com/AndrewJager/CSC325-Team-8-Snapshot-2 
+* Snapshot #1 - https://github.com/AndrewJager/CSC325-Team-8-Snapshot-1
+* Snapshot #2 - https://github.com/AndrewJager/CSC325-Team-8-Snapshot-2 
+* Snapshot #3 - https://github.com/AndrewJager/CSC325-Team-8-Snapshot-3
