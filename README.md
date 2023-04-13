@@ -15,7 +15,7 @@ To run this bot, you must create a config.json file (in the same directory as in
 }
 ```
 
-Replace the values with your token, clientId(ID of the bot), and guildId(ID of the server)
+Replace the values with your bot token, clientId(ID of the bot), and guildId(ID of the server). To find the bot and server IDs, enable developer mode in discord, right-click on the server/bot, and select "Copy User ID" or "Copy Server ID".  
 
 You also must have Discord.js and Node.js installed. 
 Tutorial here: https://discordjs.guide/preparations/#installing-node-js
