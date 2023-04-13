@@ -26,8 +26,6 @@ module.exports = {
 		// Delete existing buttons from database
 		await database.deleteButtonsStartingWith(btnNameBase);
 
-		// TODO: Should we delete existing role assignment messages? Would need to store their ids
-
 		for (let i = 1; i <= 8; ++i) {
 			roles.push(interaction.options.getRole(`class${i}`));
 		}

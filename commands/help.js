@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder,  PermissionFlagsBits  } = require('discord.js');
-// optional: put in a specific command for more details
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')

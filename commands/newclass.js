@@ -4,7 +4,6 @@ const Course = require('../obj/course');
 const CatLink = require('../obj/catlink');
 const Color = require('color');
 const fs = require('fs');
-const { LIMIT_LENGTH } = require('sqlite3');
 
 module.exports = {
 	data: new SlashCommandBuilder()

@@ -1,4 +1,3 @@
-const { ThreadChannel } = require('discord.js');
 const fs = require('node:fs');
 const sqlite3 = require('sqlite3').verbose();
 

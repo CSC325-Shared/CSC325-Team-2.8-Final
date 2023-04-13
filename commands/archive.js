@@ -34,7 +34,6 @@ module.exports = {
 
 			interaction.guild.members.fetch().then(list => {
 				let rolesChanged = 0;
-				// this could probably be optimized by using .filter, look into it later
 				for (i = 0; i < list.size; i++) { // loop through all students who have the classStu role
 					const member = list.at(i);
 					if (member.roles.cache.some(role => role === classStu)) {
